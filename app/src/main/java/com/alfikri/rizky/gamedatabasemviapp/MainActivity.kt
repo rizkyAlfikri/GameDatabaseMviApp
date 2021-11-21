@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun observerTextInput() {
         disposable =
-            RxTextView.textChanges(binding.edtSearchGame).throttleLast(1000, TimeUnit.MILLISECONDS)
+            RxTextView.textChanges(binding.edtSearchGame).throttleLast(2000, TimeUnit.MILLISECONDS)
                 .subscribe {
                     lifecycleScope.launch {
                         mainViewModel.queryGameIntent.send(MainIntent.FetchGames(it.toString()))

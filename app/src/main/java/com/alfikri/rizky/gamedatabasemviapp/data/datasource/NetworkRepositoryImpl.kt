@@ -1,6 +1,5 @@
 package com.alfikri.rizky.gamedatabasemviapp.data.datasource
 
-import android.util.Log
 import com.alfikri.rizky.gamedatabasemviapp.data.model.GameInfoModel
 import com.alfikri.rizky.gamedatabasemviapp.data.network.ApiService
 import com.alfikri.rizky.gamedatabasemviapp.state.MainState
@@ -22,16 +21,12 @@ class NetworkRepositoryImpl(
             try {
                 val response = apiService.searchGames("a51ef38e6d754bdc919a4104b0387fa3", queryGame)
                 val games = response.gameDataResults
-                Log.e("Rizky test", "NetworkRepositoryImpl ${response}")
                 when {
-                    games.isNullOrEmpty() -> emit(MainState.Empty<List<GameInfoModel>>())
-                    else -> {
-
-                        emit(MainState.Success(data = games))
-                    }
+                    games.isNullOrEmpty() -> emit(MainState.Empty)
+                    else -> emit(MainState.Success(data = games))
                 }
             } catch (e: Exception) {
-                emit(MainState.Failed<List<GameInfoModel>>(errorMessage = e.message))
+                emit(MainState.Failed(errorMessage = e.message))
             }
         }.flowOn(Dispatchers.IO)
 }

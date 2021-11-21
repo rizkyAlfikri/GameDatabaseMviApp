@@ -1,7 +1,6 @@
 package com.alfikri.rizky.gamedatabasemviapp.data.datasource
 
 import com.alfikri.rizky.gamedatabasemviapp.data.model.GameInfoModel
-import com.alfikri.rizky.gamedatabasemviapp.data.model.GameResponseModel
 import com.alfikri.rizky.gamedatabasemviapp.state.MainState
 import kotlinx.coroutines.flow.Flow
 

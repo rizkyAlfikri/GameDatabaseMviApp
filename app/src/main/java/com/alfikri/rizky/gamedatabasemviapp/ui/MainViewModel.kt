@@ -25,7 +25,7 @@ class MainViewModel(
 ) : ViewModel() {
 
     val queryGameIntent = Channel<MainIntent>(Channel.UNLIMITED)
-    private val _queryGameState = MutableStateFlow<MainState<List<GameInfoModel>>>(MainState.Idle())
+    private val _queryGameState = MutableStateFlow<MainState<List<GameInfoModel>>>(MainState.Idle)
     val queryGameState: StateFlow<MainState<List<GameInfoModel>>>
         get() = _queryGameState
 
@@ -46,9 +46,9 @@ class MainViewModel(
     private fun searchGame(queryGame: String) {
         viewModelScope.launch {
             if (queryGame.isEmpty()) {
-                _queryGameState.value = MainState.Idle()
+                _queryGameState.value = MainState.Idle
             } else {
-                _queryGameState.value = MainState.Loading()
+                _queryGameState.value = MainState.Loading
                 mainRepository.searchGames(queryGame).collect {
                     _queryGameState.value = it
                 }
