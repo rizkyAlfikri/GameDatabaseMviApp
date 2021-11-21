@@ -10,6 +10,7 @@ import com.alfikri.rizky.gamedatabasemviapp.data.model.GameInfoModel
 import com.alfikri.rizky.gamedatabasemviapp.databinding.ItemGameBinding
 import com.alfikri.rizky.gamedatabasemviapp.ui.GamesAdapter.GameViewHolder
 import com.bumptech.glide.Glide
+import kotlin.math.floor
 
 /**
  * @author Rizky Alfikri Rachmat (rizkyalfikri@gmail.com)
@@ -33,8 +34,9 @@ class GamesAdapter : ListAdapter<GameInfoModel, GameViewHolder>(DIFF_UTIL) {
             binding.run {
                 tvGameName.text = gameInfoModel.name
                 tvGameRelease.text = gameInfoModel.released
-                rbGameRate.rating = gameInfoModel.rating?.toFloat() ?: 0F
-                tvGameRate.text = StringBuilder("${(gameInfoModel.rating?.div(2)).toString()}/5")
+                val rate = gameInfoModel.rating?.let { floor(it) }
+                rbGameRate.rating = rate?.toFloat() ?: 0F
+                tvGameRate.text = StringBuilder("$rate/5")
                 Glide.with(binding.root)
                     .load(gameInfoModel.backgroundImage)
                     .placeholder(R.color.white)
